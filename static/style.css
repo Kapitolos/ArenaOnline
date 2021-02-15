@@ -1,0 +1,225 @@
+body {
+    background-color: #880007;
+    /* color: #F1545C; */
+    /* EC000C
+    010000 */
+    color: #010000;
+    font-size: 15pt;
+}
+
+#signinpage {
+    display: grid;
+    grid-template-columns: 40% 20% 20% 40%;
+    text-align: center;
+    margin-top:10%
+}
+
+
+#signcol{
+    border: solid black 10px;
+    padding: 10px;
+}
+
+#regcol {
+    text-align: right;
+}
+
+#end {
+    text-align: center;
+    font-size: 25pt;
+    margin-top: 25%;
+}
+
+#statcontainer {
+    display: grid;
+    grid-template-columns: 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09%;
+    font-size: 10pt;
+    background-color: rgb(71, 13, 13);
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(68, 2, 2));
+    padding: 10px;
+    border: solid black 10px;
+    height: auto;
+}
+
+#statcontainer h1 {
+    color:linear-gradient(red, yellow);
+}
+
+#statcontainer h2 {
+    color: rgba(226, 79, 21, 0.801);
+}
+
+#statback {
+    background-image: linear-gradient(black, white);
+}
+
+a{
+    text-decoration: none;
+}
+
+button {
+    background-color: #f8acb0;
+    color: #880007;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20pt;
+}
+
+#button {
+    padding: 12px;
+}
+
+#onwardsbutton {
+    padding: 12px;
+    margin-top: 5%;
+}
+
+h1 {
+    color: #F1545C;
+}
+
+h2 {
+    color: #EC000C;
+   
+}
+
+p {
+    font-family: 'Paprika', cursive;
+}
+
+h3 {
+    color: #F1545C;
+}
+
+.aod {
+    color: black;
+    text-shadow: -1px 1px #F1545C;
+    margin-top: 3%
+
+}
+
+#welcome {
+    text-shadow: -1px 1px #e5ff00;
+}
+
+.Arenapage {
+    text-align: center;
+}
+
+#wraithpage {
+    text-align: center;
+}
+
+.image {
+    border: 10px;
+}
+
+.Characterpage {
+    text-align: center;
+    margin-top: 15%;
+}
+
+.indexpage {
+    text-align: center;
+}
+
+.arenafight {
+    text-align: center;
+}
+
+#victoryscreen {
+    text-align: center;
+    margin-top: 25%;
+}
+
+#combatmessage {
+    color:white;
+    font-family: 'Inria Serif', serif;
+}
+
+#heromessage {
+    color: white;
+    font-family: 'Inria Serif', serif;
+}
+
+#mediummessage {
+    color: rgb(255, 231, 13);
+}
+
+#died {
+    text-align: center;
+    margin-top: 15%;
+}
+
+#retort {
+    margin-top: 3%;
+}
+
+#Skeleton {
+    width: 155px;
+    height: 146px;
+    margin: 2em auto;
+    background: transparent url(assets/Skeleton/Idle.png) 0 0 no-repeat;
+    animation: skeletonidle 1s steps(4) infinite;
+    transform: scale(3);
+}
+
+#Wraith {
+    width: 68px;
+    height: 87px;
+    margin: 2em auto;
+    background: transparent url(assets/PNG/Knight-Idle-Sheet.png) 0 0 no-repeat;
+    animation: wraithidle 1s steps(4) infinite;
+    transform: scale(3.5);
+    margin-top: 8%;
+}
+
+#heroidle {
+    width: 70px;
+    height: 77px;
+    margin: 2em auto;
+    background: transparent url(assets/Knight/heroidle.png) 0 0 no-repeat;
+    animation: heroidle 1s steps(15) infinite;
+    transform: scale(3.5);
+    margin-top: 8%;
+}
+
+#heroattack {
+    width: 157px;
+    height: 81px;
+    margin: 2em auto;
+    background: transparent url(assets/Knight/noBKG_KnightAttack_strip.png) 0 0 no-repeat;
+    animation: heroattack 1.5s steps(22) infinite;
+    transform: scale(3.5);
+    margin-top: 8%;
+}
+
+#deathani {
+    width: 100px;
+    height: 81px;
+    margin: 2em auto;
+    background: transparent url(assets/Knight/noBKG_KnightDeath_strip.png) 0 0 no-repeat;
+    animation: herodeath 7.5s steps(15) 1;
+    transform: scale(3.5);
+    margin-top: 8%;
+}
+
+@keyframes herodeath {
+    100% { background-position: -2882px 0px;}
+}
+
+
+@keyframes heroidle {
+    100% { background-position: -961px 0px;}
+}
+
+@keyframes heroattack {
+    100% { background-position: -3167px 0px;}
+}
+
+@keyframes skeletonidle {
+    100% { background-position: -600px 0px; }
+  }
+
+  @keyframes wraithidle {
+    100% { background-position: -256px 0px; }
+  }

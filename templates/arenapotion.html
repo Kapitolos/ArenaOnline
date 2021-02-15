@@ -1,0 +1,61 @@
+{%extends "base.html"%}
+{%block head%}
+<div type="container" id="statcontainer">
+    <div>
+        <h1>Name</h1>
+        <h2>{{hero.name}}</h2>
+    </div>
+    <div>
+        <h1>Age</h1>
+        <h2>{{hero.age}}</h2>
+    </div>
+    <div>
+        <h1>Health</h1>
+        <h2>{{hero.hp}}</h2>
+    </div>
+    <div>
+        <h1>Level</h1>
+        <h2>{{hero.lvl}}</h2>
+    </div>
+    <div>
+        <h1>AC</h1>
+        <h2>{{hero.ac}}</h2>
+    </div>
+    <div>
+        <h1>EXP</h1>
+        <h2>{{hero.xp}}</h2>
+    </div>
+    <div>
+        <h1>Stones</h1>
+        <h2>{{hero.ammo}}</h2>
+    </div>
+    <div>
+        <h1>STR</h1>
+        <h2>{{hero.str}}</h2>
+    </div>
+    <div>
+        <h1>DEX</h1>
+        <h2>{{hero.dex}}</h2>
+    </div>
+    <div>
+        <h1>CON</h1>
+        <h2>{{hero.con}}</h2>
+    </div>
+    <div>
+        <h1>Object of Desire</h1>
+        <h2>{{hero.ofd}}</h2>
+    </div>
+</div>
+{%endblock head%}
+{%block content%}
+<div class="arenafight">
+<h1 class="aod">ARENA</h1>
+<p>Before you {{hero.name}}, stands a {{enemy.name}}!</p>
+<div id="heroattack"></div>
+<div id="heromessage" name="heromessage">{{heromessage}}</div>
+<p>You must press on!</p>
+<button id="button">
+    <a value="continue" href="/arena">Continue</a>
+</button>
+</div>
+{%endblock content%}
