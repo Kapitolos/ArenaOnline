@@ -30,6 +30,10 @@
         <h2>{{hero.ammo}}</h2>
     </div>
     <div>
+        <h1>Potion</h1>
+        <h2>{{hero.potion}}</h2>
+    </div>
+    <div>
         <h1>STR</h1>
         <h2>{{hero.str}}</h2>
     </div>
@@ -49,6 +53,9 @@
 {%endblock head%}
 {%block content%}
 <div id='wraithpage'>
+    <script type="text/javascript">
+        backgroundtoggle("{{enemy.name}}");
+        </script>
 <h1 class="aod">ARENA</h1>
 <div id="{{enemy.name}}" class="image"></div>
 <p id="mediummessage">Before you {{hero.name}}, stands a {{enemy.name}}!</p>

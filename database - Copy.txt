@@ -1,0 +1,17 @@
+0,Bill,1111,Bill The Bitch Whore,33,True,30,6,1,1,6,3,15,7,Betty
+1,Bill,sdf,Bill The Bitch Whore,33,True,30,6,1,1,6,10,9,9,33
+1,Martin,pickle,Woohoo,33,True,30,6,1,1,6,3,14,7,Guns
+5,333,242,3113,33,True,30,6,1,1,6,13,11,13,444
+6,Thomas,333,2323,33,True,30,6,1,1,6,17,9,12,44
+7,Pam,I'mPam,Dragon Pam,33,True,30,6,1,1,6,3,8,17,Van
+8,Pam,PAMMY,PAMMMMM,33,True,30,6,1,1,6,9,17,6,VINCE
+9,Pam,PAMMY,PPPPPAAAAAMMMM,99,True,30,6,1,1,6,14,10,18,PHIL
+10,Pam,33,149144,33,True,30,6,1,1,6,13,5,18,2
+11,PAM,PAMMY,PPPAAAMAMMMM,33,True,30,6,1,1,6,17,4,6,MYSELF
+11,Thomas,hi,Kapitolos,36,True,30,6,1,1,6,15,18,11,Dorotka
+12,Thomas,sdf,Kapitolos,33,True,30,6,1,1,6,12,17,17,Dorotka
+13,poop,33,33,33,True,30,6,1,1,6,16,13,15,33
+14,sdf,sdfsdf,sdfds,33,True,30,6,1,1,6,11,3,11,33{'userid': 14, 'username': 'sdf', 'password': 'sdfsdf', 'charactername': 'sdfds', 'userage': '33', 'useralive': True, 'userhp': 30, 'userac': 6, 'userxp': 1, 'userlvl': 1, 'userammo': 6, 'userstr': 11, 'userdex': 3, 'usercon': 11, 'userofd': '33'}
+15,23432423,23,333,11,True,30,6,1,1,6,7,14,15,22{'userid': 15, 'username': '23432423', 'password': '23', 'charactername': '333', 'userage': '11', 'useralive': True, 'userhp': 30, 'userac': 6, 'userxp': 1, 'userlvl': 1, 'userammo': 6, 'userstr': 7, 'userdex': 14, 'usercon': 15, 'userofd': '22'}
+16,Stephen,123,ControllerFace,39,True,30,6,1,1,6,3,11,10,Money{'userid': 16, 'username': 'Stephen', 'password': '123', 'charactername': 'ControllerFace', 'userage': '39', 'useralive': True, 'userhp': 30, 'userac': 6, 'userxp': 1, 'userlvl': 1, 'userammo': 6, 'userstr': 3, 'userdex': 11, 'usercon': 10, 'userofd': 'Money'}
+17,Stephen,123,ControllerFace,39,True,30,6,1,1,6,12,12,8,Spaceships{'userid': 17, 'username': 'Stephen', 'password': '123', 'charactername': 'ControllerFace', 'userage': '39', 'useralive': True, 'userhp': 30, 'userac': 6, 'userxp': 1, 'userlvl': 1, 'userammo': 6, 'userstr': 12, 'userdex': 12, 'usercon': 8, 'userofd': 'Spaceships'}{'userid': 18, 'username': 'Martin', 'password': '111', 'charactername': 'George', 'userage': '99', 'useralive': True, 'userhp': 30, 'userac': 6, 'userxp': 1, 'userlvl': 1, 'userammo': 6, 'userstr': 15, 'userdex': 7, 'usercon': 12, 'userofd': 'Books'}

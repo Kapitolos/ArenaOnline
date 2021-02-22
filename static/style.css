@@ -1,23 +1,53 @@
-body {
+#body {
     background-color: #880007;
-    /* color: #F1545C; */
-    /* EC000C
-    010000 */
     color: #010000;
     font-size: 15pt;
+    background-image: url(assets/castlemaster.png);
+    background-repeat: no-repeat;
+    background-position-x: left;
+    overflow-x: hidden;
+}
+
+#bodySkeleton {
+    background-image: url(assets/arena4.png);
+    background-position-x: 41%;
+    background-color: rgb(27, 4, 4);
+    background-position-y: 40%;
+    background-repeat: no-repeat;
+}
+
+#bodyWraith {
+    background-color: black;
+    color: #010000;
+    font-size: 15pt;
+    background-image: url(assets/arena2.png);
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    overflow-x: hidden;
+}
+
+#bodyGoblin {
+    background-color: black;
+    color: #010000;
+    font-size: 15pt;
+    background-image: url(assets/textbg.png);
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    overflow-x: hidden;
 }
 
 #signinpage {
     display: grid;
     grid-template-columns: 40% 20% 20% 40%;
     text-align: center;
-    margin-top:10%
-}
+    margin-top:10%;
 
+}
 
 #signcol{
     border: solid black 10px;
     padding: 10px;
+    background-color: #88000780
 }
 
 #regcol {
@@ -27,18 +57,33 @@ body {
 #end {
     text-align: center;
     font-size: 25pt;
-    margin-top: 25%;
+    margin-top: 13%;
 }
 
 #statcontainer {
     display: grid;
-    grid-template-columns: 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09% 9.09%;
+    grid-template-columns: 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33% 8.33%;
     font-size: 10pt;
-    background-color: rgb(71, 13, 13);
-    background-image: linear-gradient(rgb(0, 0, 0), rgb(68, 2, 2));
+    /* background-color: rgb(71, 13, 13);
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(68, 2, 2)); */
+    animation-name: statback;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
     padding: 10px;
     border: solid black 10px;
     height: auto;
+}
+
+@keyframes statback {
+    0% {background-image: linear-gradient(rgb(0, 0, 0), rgb(83, 8, 8));}
+    12% {background-image: linear-gradient(rgb(0, 0, 0), rgb(88, 20, 20));}
+    25% {background-image: linear-gradient(rgb(0, 0, 0), rgb(95, 10, 10));}
+    36% {background-image: linear-gradient(rgb(0, 0, 0), rgb(97, 21, 21));}
+    50% {background-image: linear-gradient(rgb(0, 0, 0), rgb(99, 31, 31));}
+    62% {background-image: linear-gradient(rgb(0, 0, 0), rgb(95, 21, 21));}
+    75% {background-image: linear-gradient(rgb(0, 0, 0), rgb(90, 18, 18));}
+    87% {background-image: linear-gradient(rgb(0, 0, 0), rgb(87, 18, 18));}
+    100% {background-image: linear-gradient(rgb(0, 0, 0),rgb(83, 8, 8));}
 }
 
 #statcontainer h1 {
@@ -84,6 +129,12 @@ h2 {
 
 p {
     font-family: 'Paprika', cursive;
+    background-color: #000000;
+    color: red;
+    border: white solid 3px;
+    width: 50%;
+    text-align: center;
+    margin-left: 24%;
 }
 
 h3 {
@@ -97,15 +148,26 @@ h3 {
 
 }
 
+#restart {
+    text-align: center;
+    margin-top: 5%;
+    margin-left:47%
+}
+
 #welcome {
     text-shadow: -1px 1px #e5ff00;
 }
 
 .Arenapage {
     text-align: center;
+    /* background-image: url(assets/arena2.png); */
 }
 
 #wraithpage {
+    text-align: center;
+}
+
+#goblinpage {
     text-align: center;
 }
 
@@ -116,6 +178,7 @@ h3 {
 .Characterpage {
     text-align: center;
     margin-top: 15%;
+
 }
 
 .indexpage {
@@ -124,11 +187,13 @@ h3 {
 
 .arenafight {
     text-align: center;
+
 }
 
 #victoryscreen {
     text-align: center;
     margin-top: 25%;
+    color:white;
 }
 
 #combatmessage {
@@ -163,6 +228,25 @@ h3 {
     transform: scale(3);
 }
 
+#Skeletonattack {
+    width: 155px;
+    height: 146px;
+    margin: 2em auto;
+    background: transparent url(assets/Skeleton/Attack.png) 0 0 no-repeat;
+    animation: skeletonattack 1s steps(8) infinite;
+    transform: scale(3);
+}
+
+
+#Goblin {
+    width: 155px;
+    height: 146px;
+    margin: 2em auto;
+    background: transparent url(assets/Goblin/Idle.png) 0 0 no-repeat;
+    animation: skeletonidle 1s steps(4) infinite;
+    transform: scale(3);
+}
+
 #Wraith {
     width: 68px;
     height: 87px;
@@ -171,6 +255,10 @@ h3 {
     animation: wraithidle 1s steps(4) infinite;
     transform: scale(3.5);
     margin-top: 8%;
+}
+
+#Wraithid {
+    background-image: url('/static/assets/arena2.png');
 }
 
 #heroidle {
@@ -218,6 +306,10 @@ h3 {
 
 @keyframes skeletonidle {
     100% { background-position: -600px 0px; }
+  }
+
+  @keyframes skeletonattack {
+    100% { background-position: -1199px 0px; }
   }
 
   @keyframes wraithidle {

@@ -31,6 +31,10 @@
         <h2>{{hero.ammo}}</h2>
     </div>
     <div>
+        <h1>Potion</h1>
+        <h2>{{hero.potion}}</h2>
+    </div>
+    <div>
         <h1>STR</h1>
         <h2>{{hero.str}}</h2>
     </div>
@@ -50,14 +54,18 @@
 
 {%endblock head%}
 {%block content%}
-<div class='Arenapage'>
+<div class='Arenapage' id="Arenapage">
 <h1 class="aod">ARENA</h1>
 <p id="mediummessage">Before you {{hero.name}}, stands a {{enemy.name}}!</p>
 <div id="{{enemy.name}}" class="image"></div>
+<script type="text/javascript">
+    backgroundtoggle("{{enemy.name}}");
+    // anitoggle("{{enemy.name}}");
+    </script>
 <div id="combatmessage" name="combatmessage">{{combatmessage}}</div>
 <p>How will you retort!?</p>
 <div id="retort">
-<button id="button">
+<button id="button" onclick="anitoggle("{{enemy.name}}")">
     <a value="Dagger" href="/arenadagger">DAGGER</a>
 </button>
 <button id="button">

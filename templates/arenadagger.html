@@ -30,6 +30,10 @@
         <h2>{{hero.ammo}}</h2>
     </div>
     <div>
+        <h1>Potion</h1>
+        <h2>{{hero.potion}}</h2>
+    </div>
+    <div>
         <h1>STR</h1>
         <h2>{{hero.str}}</h2>
     </div>
@@ -49,6 +53,10 @@
 {%endblock head%}
 {%block content%}
 <div class="arenafight">
+    <script type="text/javascript">
+        backgroundtoggle("{{enemy.name}}");
+        anitoggle("{{enemy.name}}");
+        </script>
 <h1 class="aod">ARENA</h1>
 <p>Before you {{hero.name}}, stands a {{enemy.name}}!</p>
 <div id="heroattack"></div>
