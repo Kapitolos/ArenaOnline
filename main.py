@@ -5,10 +5,10 @@ import csv
 import json
 import psycopg2
 
-DB_host = '127.0.0.1'
-DB_user = 'postgres'
-DB_password = 'Redwings!'
-DB_name= 'heroes'
+DB_host = 'PUT'
+DB_user = 'DB'
+DB_password = 'INFO'
+DB_name= 'HERE'
 
 app = Flask(__name__)
 
