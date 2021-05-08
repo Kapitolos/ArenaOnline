@@ -3,109 +3,107 @@ from characters import Character, skeleton, wraith, goblin, end
 import random
 import csv
 import json
+import psycopg2
+
+DB_host = '127.0.0.1'
+DB_user = 'postgres'
+DB_password = 'Redwings!'
+DB_name= 'heroes'
 
 app = Flask(__name__)
 
 hero = Character(0,"Empty", 1, True, 1, 1, 1, 1, 1, 1, 1, 1, "Empty",0)
 userid = 0
-userid += 1
 lvldict = {"lvl0": 0, "lvl1":1, 'lvl2': 300, 'lvl3': 1000, 'lvl4':2000, 'lvl5':5000,'lvl6':8000,'lvl7':12000}
 enemylist = [skeleton, goblin, wraith, end]
 enemyline = 0
 enemy = enemylist[enemyline]
 
+def write_to_db(data):
+    conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM players;")
+    db_users = cur.fetchall()
+    userid = (len(db_users))
+    print(userid)
+    username = data["warriorname"]
+    password = data["password"]
+    charactername = data["username"]
+    userage = data['age']
+    userobjectofdesire = data['objectOfDesire']
+    useralive = True
+    userhp = 30
+    userac = 6
+    userxp = 1
+    userlvl = 1
+    userammo = 6
+    userstr = (random.randint(3, 18))
+    userdex = (random.randint(3, 18))
+    usercon = (random.randint(3, 18))
+    userofd = data['objectOfDesire']
+    userpotion = 5
 
+    cur.execute("""
+    INSERT INTO players (warriorname, password, username, age, objectofdesire, userid, useralive, userhp, userac, userxp, userlvl, userammo,userstr,userdex,usercon,userofd,userpotion)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+    """,
+    (username, password,charactername, userage, userobjectofdesire, userid, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userofd, userpotion))
+    conn.commit()
+    global hero
+    hero = Character(userid, charactername, userage, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userofd, userpotion)
+    cur.close()
+    conn.close()
 
-
-
-def write_to_file(data):
-    with open('database.txt', mode='r+') as database:
-        global userid
-        userid += len(database.readlines())
-        data['userid'] = userid
-        username = data["warriorname"]
-        password = data["password"]
-        charactername = data["username"]
-        userage = data['age']
-        data['useralive'] = True
-        data['userhp'] = 30
-        data['userac'] = 6
-        data['userxp'] = 1
-        data['userlvl'] = 1
-        data['userammo'] = 6
-        data['userstr'] =(random.randint(3, 18))
-        data['userdex'] = (random.randint(3, 18))
-        data['usercon'] = (random.randint(3, 18))
-        data['userofd'] = data['objectOfDesire']
-        data['userpotion'] = 5
-        file = database.write(json.dumps(data))
-        file = database.write('\n')
-        userid -= 1
-
-
-def write_to_csv(data):
-    with open('database.csv', newline='',mode='r+') as database2:
-        global userid
-        userid += len(database2.readlines())
-        username = data["warriorname"]
-        password = data["password"]
-        charactername = data["username"]
-        userage = data['age']
-        useralive = True
-        userhp = 30
-        userac = 6
-        userxp = 1
-        userlvl = 1
-        userammo = 6
-        userstr = (random.randint(3, 18))
-        userdex = (random.randint(3, 18))
-        usercon = (random.randint(3, 18))
-        userofd = data['objectOfDesire']
-        userpotion = 5
-        csv_writer = csv.writer(database2,delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        csv_writer.writerow([userid,username,password,charactername,userage,useralive,userhp,userac,userxp,userlvl,userammo,userstr,userdex,usercon,userofd, userpotion])
 
 def checkregistry(data):
-    with open('database.txt', mode='r') as database:
-        if data["warriorname"] and data["password"] in database:
-            print('already exists')
-            return redirect("/signin.html")
+    conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM players;")
+    db_users = cur.fetchall()
+    isin = False
+    for i in db_users:
+        # print(i)
+        # print(data["warriorname"])
+        if data["warriorname"] and data["password"] in i:
+            # print('already exists')
+            isin = True
+            # return redirect("/signin.html")
+            break
         else:
-            write_to_file(data)
-            write_to_csv(data)
-            global userid
-            userid += len(database.readlines())
-            username = data["warriorname"]
-            password = data["password"]
-            charactername = data["username"]
-            userage = data['age']
-            useralive = True
-            userhp = 30
-            userac = 6
-            userxp = 1
-            userlvl = 1
-            userammo = 6
-            userstr = (random.randint(3, 18))
-            userdex = (random.randint(3, 18))
-            usercon = (random.randint(3, 18))
-            userofd = data['objectOfDesire']
-            userpotion = 5
-            print('wrote to file')
-            global hero
-            hero = Character(userid,charactername, userage, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userofd, userpotion)
-            print(hero.name)
+            # print("Dorotka is pretty")
+            isin = False
+    if isin == False:
+        cur.close()
+        conn.close()
+        write_to_db(data)
+        print("wrote to file")
+
+    else:
+        print('pre-exisiting name and password. Attempting to route to Sign In Page')
+        signin()
+            # break
 
 
 def signinfunc(data):
-    with open('database.txt', mode='r') as database:
-        for line in database.readlines():
-            hgrab = json.loads(line)
-            if data["warriorname"] == hgrab["warriorname"] and data["password"] == hgrab["password"]:
-                print('character found')
-                global hero
-                hero = Character(hgrab["userid"],hgrab["username"],hgrab["age"],hgrab["useralive"],hgrab["userhp"],hgrab["userac"],hgrab["userxp"],hgrab["userlvl"],hgrab["userammo"],hgrab["userstr"],hgrab["userdex"],hgrab["usercon"],hgrab["userofd"],hgrab["userpotion"])
-            else:
-                print('character not found')
+    conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM players;")
+    db_users = cur.fetchall()
+    isin = False
+    for i in db_users:
+        if data["warriorname"] and data["password"] in i:
+            global hero
+            test=(json.dumps(i))
+            test2 = json.loads(test)
+            hero = Character(test2[5],test2[2],test2[3],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[15],test2[16])
+            isin = True
+        else:
+            print("not found")
+    if isin == False:
+        return render_template("characternotfound.html")
+    else:
+        return render_template('character.html', name=hero.name, obj=hero.ofd, hero=hero)
+
 
 
 
@@ -127,13 +125,13 @@ def register():
     else:
         return 'something went wrong'
 
+
 @app.route("/signcheck", methods=["POST", "GET"])
 def signcheck():
     if request.method == 'POST':
         global data
         data = request.form.to_dict()
-        signinfunc(data)
-        return render_template('character.html', name=hero.name, obj=hero.ofd, hero=hero)
+        return signinfunc(data)
     else:
         return 'something went wrong'
 
@@ -331,8 +329,6 @@ def arenastone():
                     return render_template("enemydead.html", heromessage=heromessage, enemy= enemy, hero=hero)
                 else:
                     break
-    # heromessage="Not working on stone page goblin?"
-    # ammomessage="Not working on stone page goblin?"
     return render_template("arenastone.html" ,heromessage=heromessage, enemy= enemy, hero=hero, ammomessage=ammomessage )
 
 @app.route("/arenapotion", methods=["POST","GET"])
