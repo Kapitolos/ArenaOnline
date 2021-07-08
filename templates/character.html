@@ -5,8 +5,9 @@
 <div class="Characterpage">
 <h1 id="welcome">WELCOME <br> {{name}} </h1>
 <div id="heroidle"></div>
-<p>You awaken to the sound of pain! Your precious {{obj}} has been TAKEN FROM YOU!</p>
+<p>You're braver than me that's for sure! Now enter the Arena!</p>
 <button id="button"><a href="/arena">Enter The Arena</a></button>
+<img src="{{ url_for('static', filename='assets/arena.png') }}" id="characterpic">
 </div>
 
 {%endblock content%}

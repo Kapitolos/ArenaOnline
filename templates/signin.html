@@ -2,21 +2,21 @@
 {%block content%}
 <div id="signinbg">
 <div id="regcol">
-    <button><a href='/index'>REGISTER</a></button>
+    <button id="regbutton"><a href='/index'>REGISTER</a></button>
 </div>
-
 <div id="signinpage">
-    <div></div>
     <div id="signcol">
         <form method="POST" action="signcheck">
         <h1>Sign In</h1>
-        <h3><input type='text' placeholder="warriorname" name="warriorname" id="warriorname"></h3>
+        <h3><input type='text' placeholder="warriorname" name="username" id="warriorname"></h3>
         <h3><input type="text" placeholder="password" name="password" id="password"></h3>
         <button type="submit">Login</button></form>
     </div>
     <div>
+        
     </div>
     <div></div>
 </div>
+<img src="{{ url_for('static', filename='assets/arena.png') }}" id="registerpic">
 </div>
 {%endblock%}
