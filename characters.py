@@ -1,10 +1,9 @@
 import random
 
 class Character:
-    def __init__(self,id, name, age, alive, hp, ac, xp, lvl, ammo, str, dex, con, ofd, potion):
+    def __init__(self,id, name, alive, hp, ac, xp, lvl, ammo, str, dex, con, potion):
         self.id = id
         self.name = name
-        self.age = age
         self.alive = alive
         self.hp = hp
         self.ac = ac
@@ -14,7 +13,6 @@ class Character:
         self.str = str
         self.dex = dex
         self.con = con
-        self.ofd = ofd
         self.potion = potion
 
     def lvlup(self):
@@ -30,7 +28,7 @@ class Character:
 
 
 
-skeleton = Character(0,"Skeleton", 783, True, 10, 7, 300, 1, 0, 14, 14, 14, "A Soul", 0)
-wraith = Character(0,"Wraith", 1209, True, 10, 10, 750, 3, 0, 16, 17, 14, "Release", 0)
-goblin = Character(0,"Goblin", 30, True, 10, 7, 300, 1, 0, 14, 14, 14, "Loot", 0)
-end = Character(0,"gameover", 1209, True, 10, 10, 750, 3, 0, 16, 17, 14, "end", 0)
+skeleton = Character(0,"Skeleton", True, 10, 7, 300, 1, 0, 14, 14, 14, 0)
+wraith = Character(0,"Wraith", True, 10, 10, 750, 3, 0, 16, 17, 14, 0)
+goblin = Character(0,"Goblin", True, 10, 7, 300, 1, 0, 14, 14, 14, 0)
+end = Character(0,"gameover", True, 10, 10, 750, 3, 0, 16, 17, 14, 0)
