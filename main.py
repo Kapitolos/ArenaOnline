@@ -4,15 +4,16 @@ import random
 import csv
 import json
 import psycopg2
+import os
 
-DB_host = 'PUT'
-DB_user = 'DB'
-DB_password = 'INFO'
-DB_name= 'HERE'
+DB_host = '127.0.0.1'
+DB_user = 'postgres'
+DB_password = 'Redwings!'
+DB_name= 'heroes'
 
 app = Flask(__name__)
 
-hero = Character(0,"Empty", 1, True, 1, 1, 1, 1, 1, 1, 1, 1, "Empty",0)
+hero = Character(0,"Empty", True, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 userid = 0
 lvldict = {"lvl0": 0, "lvl1":1, 'lvl2': 300, 'lvl3': 1000, 'lvl4':2000, 'lvl5':5000,'lvl6':8000,'lvl7':12000}
 enemylist = [skeleton, goblin, wraith, end]
@@ -26,11 +27,8 @@ def write_to_db(data):
     db_users = cur.fetchall()
     userid = (len(db_users))
     print(userid)
-    username = data["warriorname"]
+    username = data["username"]
     password = data["password"]
-    charactername = data["username"]
-    userage = data['age']
-    userobjectofdesire = data['objectOfDesire']
     useralive = True
     userhp = 30
     userac = 6
@@ -40,17 +38,15 @@ def write_to_db(data):
     userstr = (random.randint(3, 18))
     userdex = (random.randint(3, 18))
     usercon = (random.randint(3, 18))
-    userofd = data['objectOfDesire']
     userpotion = 5
-
     cur.execute("""
-    INSERT INTO players (warriorname, password, username, age, objectofdesire, userid, useralive, userhp, userac, userxp, userlvl, userammo,userstr,userdex,usercon,userofd,userpotion)
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+    INSERT INTO players (username, password, userid, useralive, userhp, userac, userxp, userlvl, userammo,userstr,userdex,usercon,userpotion)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
     """,
-    (username, password,charactername, userage, userobjectofdesire, userid, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userofd, userpotion))
+    (username, password, userid, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userpotion))
     conn.commit()
     global hero
-    hero = Character(userid, charactername, userage, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userofd, userpotion)
+    hero = Character(userid, username, useralive, userhp, userac, userxp, userlvl, userammo, userstr, userdex, usercon, userpotion)
     cur.close()
     conn.close()
 
@@ -62,15 +58,10 @@ def checkregistry(data):
     db_users = cur.fetchall()
     isin = False
     for i in db_users:
-        # print(i)
-        # print(data["warriorname"])
-        if data["warriorname"] and data["password"] in i:
-            # print('already exists')
+        if data["username"] and data["password"] in i:
             isin = True
-            # return redirect("/signin.html")
             break
         else:
-            # print("Dorotka is pretty")
             isin = False
     if isin == False:
         cur.close()
@@ -85,24 +76,26 @@ def checkregistry(data):
 
 
 def signinfunc(data):
+    print('signinfunc')
     conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
     cur = conn.cursor()
     cur.execute("SELECT * FROM players;")
     db_users = cur.fetchall()
     isin = False
     for i in db_users:
-        if data["warriorname"] and data["password"] in i:
+        if data["username"] and data["password"] in i:
             global hero
             test=(json.dumps(i))
             test2 = json.loads(test)
-            hero = Character(test2[5],test2[2],test2[3],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[15],test2[16])
+            print(test2)
+            hero = Character(test2[2],test2[2],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[16])
             isin = True
         else:
             print("not found")
     if isin == False:
         return render_template("characternotfound.html")
     else:
-        return render_template('character.html', name=hero.name, obj=hero.ofd, hero=hero)
+        return render_template('character.html', name=hero.name, hero=hero)
 
 
 
@@ -121,7 +114,7 @@ def register():
         data = request.form.to_dict()
         print(data)
         checkregistry(data)
-        return render_template('character.html', name=hero.name, obj=hero.ofd, hero=hero)
+        return render_template('character.html', name=hero.name, hero=hero)
     else:
         return 'something went wrong'
 
@@ -131,9 +124,10 @@ def signcheck():
     if request.method == 'POST':
         global data
         data = request.form.to_dict()
+        print(data)
         return signinfunc(data)
     else:
-        return 'something went wrong'
+        return 'something went wrong. Check if method was POST.'
 
 
 
@@ -145,7 +139,7 @@ def home():
 
 @app.route("/character", methods=["POST", "GET"])
 def character():
-    return render_template("character.html", name = username, obj= userofd, hero=hero)
+    return render_template("character.html", name = hero.name, hero=hero)
 
 @app.route('/arena', methods=["POST", "GET"])
 def arena():
@@ -153,12 +147,12 @@ def arena():
         # enemyattack
         strike = (random.randint(1, 20))
         if strike < hero.ac:
-            combatmessage = "The beast slashes with it's claws but barely misses!"
+            combatmessage = "The enemy attacks but barely misses!"
             break
         else:
             e1damage = (random.randint(1, 8))
             hero.hp -= e1damage
-            combatmessage = (f"\nThe beast's claws rip into your flesh for {e1damage} damage! ")
+            combatmessage = (f"\nThe enemy hits you for {e1damage} damage! ")
             if hero.hp <= 0:
                 hero.alive = False
                 return render_template("dead.html")
@@ -170,7 +164,6 @@ def arena():
             return render_template("gameover.html")
     else:
         pass
-
     return render_template("arena.html", enemy= enemy, hero=hero, combatmessage=combatmessage)
 
 @app.route('/Wraith', methods=["POST", "GET"])
@@ -187,27 +180,10 @@ def wraithfight():
             else:
                 e1damage = (random.randint(1, 8))
                 hero.hp -= e1damage
-                combatmessage = (f"\nThe beast's claws rip into your flesh for {e1damage} damage! ")
+                combatmessage = (f"\nThe beast's claws hit you for {e1damage} damage! ")
                 if hero.hp <= 0:
                     hero.alive = False
                     return render_template("dead.html", combatmessage = combatmessage)
-                    break
-                else:
-                    break
-        else:
-            agestrike = (random.randint(1, 23))
-            if agestrike < hero.con:
-                combatmessage = "It's eyes probe deep but you look away just in time!"
-                break
-            else:
-                e1damage = (random.randint(1, 10))
-                ageint = int(hero.age)
-                ageint -= e1damage
-                hero.age = str(ageint)
-                combatmessage = (f"\nThe Wraith's eyes probe deep in your soul and take away {e1damage} years! ")
-                if ageint <= 0:
-                    hero.alive = False
-                    return render_template("dead.html", combatmessage=combatmessage)
                     break
                 else:
                     break
@@ -229,12 +205,12 @@ def goblinfight():
         if attacktyperoll <= 5:
             strike = (random.randint(1, 20))
             if strike < hero.ac:
-                combatmessage = "The beast slashes with it's claws but barely misses!"
+                combatmessage = "The Goblin slashes with it's claws but barely misses!"
                 break
             else:
                 e1damage = (random.randint(1, 8))
                 hero.hp -= e1damage
-                combatmessage = (f"\nThe beast's claws rip into your flesh for {e1damage} damage! ")
+                combatmessage = (f"\nThe Goblins claws hit you for {e1damage} damage! ")
                 if hero.hp <= 0:
                     hero.alive = False
                     return render_template("dead.html", combatmessage = combatmessage)
@@ -253,8 +229,6 @@ def goblinfight():
 
     if enemy.name == 'Goblin':
         if enemy.alive == False:
-            # combatmessage = "Test"
-            # enemy = wraith
             return render_template("enemydead.html", enemy= enemy, hero=hero, combatmessage=combatmessage)
     else:
         pass
@@ -275,18 +249,18 @@ def arenadagger():
         else:
             dagger_damage = (random.randint(1, 8))
             enemy.hp -= dagger_damage
-            heromessage = (f"You slash into the beast for {dagger_damage} damage!")
+            heromessage = (f"You hit the beast for {dagger_damage} damage!")
             if enemy.hp < 0:
                 enemy.alive = False
                 hero.xp += enemy.xp
                 if hero.xp >= lvldict[f"lvl{hero.lvl + 1}"]:
                     hero.lvlup()
-                    heromessage = (f"\nYour dagger slashs deep and the bastard falls to the dust. The crowd chants the\nname of their champion: {hero.name}!"
+                    heromessage = (f"\nYour enmey falls to the dust. The crowd chants the\nname of their champion: {hero.name}!"
                                    f"\nYou've leveled up! You are now level {hero.lvl}".upper())
                 else:
-                    heromessage = (f"\nYour dagger slashs deep and the bastard falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
+                    heromessage = (f"\nYour enmey falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
                     pass
-                heromessage= (f"\nYour dagger slashs deep and the bastard falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
+                heromessage= (f"\nYour enmey falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
                 enemyline += 1
                 enemy = enemylist[enemyline]
                 return render_template("enemydead.html", heromessage=heromessage, enemy= enemy, hero=hero)
@@ -318,11 +292,11 @@ def arenastone():
                     hero.xp += enemy.xp
                     if hero.xp >= lvldict[f"lvl{hero.lvl + 1}"]:
                         hero.lvlup()
-                        heromessage = (f"\nThe stone lands with a sickening thud and the bastard falls to the dust. The crowd chants the\nname of their champion: {hero.name}!"
+                        heromessage = (f"\nThe stone lands and the enemy falls to the dust. The crowd chants the\nname of their champion: {hero.name}!"
                                        f"\nYou've leveled up! You are now level {hero.lvl}".upper())
 
                     else:
-                        heromessage = (f"\nThe stone lands with a sickening thud and the bastard falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
+                        heromessage = (f"\nThe stone lands and your enemy falls to the dust. The crowd chants the\nname of their champion: {hero.name}!".upper())
                         pass
                     enemyline += 1
                     enemy = enemylist[enemyline]
@@ -349,20 +323,10 @@ def enemydead():
 
 @app.route("/dead", methods=["POST","GET"])
 def dead():
-    # global enemy
-    # global enemyline
-    # for i in enemylist:
-    #     i.alive == True
-    # enemy = enemylist[0]
     return render_template("dead.html",heromessage = heromessage, enemy = enemy, hero = hero )
 
 @app.route("/gameover", methods=["POST","GET"])
 def gameover():
-    # global enemy
-    # global enemyline
-    # for i in enemylist:
-    #     i.alive == True
-    # enemy = enemylist[0]
     return render_template("gameover.html")
 
 if __name__ == "__main__":
