@@ -1,1 +1,0 @@
-{"warriorname": "Thomas", "password": "hi", "username": "Kapitolos", "age": "36", "objectOfDesire": "Dorotka", "userid": 1, "useralive": true, "userhp": 30, "userac": 6, "userxp": 1, "userlvl": 1, "userammo": 6, "userstr": 17, "userdex": 17, "usercon": 11, "userofd": "Dorotka", "userpotion": 5}
