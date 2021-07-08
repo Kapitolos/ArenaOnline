@@ -125,7 +125,7 @@ def signcheck():
         global data
         data = request.form.to_dict()
         print(data)
-        return signinfunc(data)
+        signinfunc(data)
     else:
         return 'something went wrong. Check if method was POST.'
 
