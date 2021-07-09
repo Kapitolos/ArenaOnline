@@ -89,7 +89,7 @@ def signinfunc(data):
             test2 = json.loads(test)
             print(test2)
             print(len(test2))
-            hero = Character(test2[2],test2[2],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[16])
+            hero = Character(test2[2],test2[2],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[15])
             isin = True
         else:
             print("not found")
