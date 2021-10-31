@@ -30,8 +30,8 @@
   background-color: rgb(80, 80, 190);
     color: #010000;
     font-size: 15pt;
-    background-image: url(assets/arena3.jpg);
-    background-size: 60%;
+    background-image: url(assets/arena1.jpg);
+    background-size: 72%;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
@@ -39,8 +39,7 @@
 }
 
 #signinpage {
-    display: grid;
-    grid-template-columns: 40% 20% 20% 40%;
+    display: block;
     text-align: center;
     margin-top:10%;
 }
@@ -49,8 +48,8 @@
     border: solid black 10px;
     padding: 10px;
     background-color: #9b1eee;
-    width: 40%;
-    margin-left: 100%;
+    width: 25%;
+    margin-left: 36%;
 }
 
 #signinpic {
@@ -143,6 +142,10 @@ button {
     font-family: 'Amatic SC', cursive;
     font-size: 20pt;
     cursor: pointer;
+}
+
+button:hover {
+  background-color: #b03cdd;
 }
 
 #regbutton {
@@ -252,6 +255,8 @@ h3 {
     text-align: center;
     margin-top: 15%;
     color:white;
+    max-width: 85%;
+    margin-left: 5%;
 }
 
 #combatmessage {
@@ -261,7 +266,7 @@ h3 {
 }
 
 #heromessage {
-    color:rgb(161, 18, 18);
+    color: rgb(0, 255, 161);
     font-family: 'Inria Serif', serif;
     font-size: 20pt;
 }
@@ -277,7 +282,7 @@ h3 {
 }
 
 #retort {
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 #Skeleton {
