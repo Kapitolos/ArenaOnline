@@ -19,7 +19,7 @@ lvldict = {"lvl0": 0, "lvl1":1, 'lvl2': 300, 'lvl3': 1000, 'lvl4':2000, 'lvl5':5
 enemylist = [skeleton, goblin, wraith, end]
 enemyline = 0
 enemy = enemylist[enemyline]
-combatmessage = ''
+combatmessage = 'placeholder'
 
 def write_to_db(data):
     conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
