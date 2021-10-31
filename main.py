@@ -6,10 +6,10 @@ import json
 import psycopg2
 import os
 
-DB_host = '127.0.0.1'
-DB_user = 'postgres'
-DB_password = 'Redwings!'
-DB_name= 'heroes'
+DB_host = os.environ.get('DB_host')
+DB_user = os.environ.get('DB_user')
+DB_password =  os.environ.get('DB_password')
+DB_name= os.environ.get('DB_name')
 
 app = Flask(__name__)
 
