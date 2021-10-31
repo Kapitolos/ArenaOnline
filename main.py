@@ -6,10 +6,10 @@ import json
 import psycopg2
 import os
 
-DB_host = '127.0.0.1'
-DB_user = 'postgres'
-DB_password = 'Redwings!'
-DB_name= 'heroes'
+DB_host =  os.environ.get('DB_host')
+DB_user = os.environ.get('DB_user')
+DB_password = os.environ.get('DB_password')
+DB_name= os.environ.get('DB_name')
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ lvldict = {"lvl0": 0, "lvl1":1, 'lvl2': 300, 'lvl3': 1000, 'lvl4':2000, 'lvl5':5
 enemylist = [skeleton, goblin, wraith, end]
 enemyline = 0
 enemy = enemylist[enemyline]
+combatmessage = ''
 
 def write_to_db(data):
     conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
