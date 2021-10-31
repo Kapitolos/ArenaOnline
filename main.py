@@ -6,10 +6,10 @@ import json
 import psycopg2
 import os
 
-DB_host = os.environ.get('DB_host')
-DB_user = os.environ.get('DB_user')
-DB_password = os.environ.get('DB_password')
-DB_name= os.environ.get('DB_name')
+DB_host = '127.0.0.1'
+DB_user = 'postgres'
+DB_password = 'Redwings!'
+DB_name= 'heroes'
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ lvldict = {"lvl0": 0, "lvl1":1, 'lvl2': 300, 'lvl3': 1000, 'lvl4':2000, 'lvl5':5
 enemylist = [skeleton, goblin, wraith, end]
 enemyline = 0
 enemy = enemylist[enemyline]
+combatmessage = ''
 
 def write_to_db(data):
     conn = psycopg2.connect(dbname=DB_name, user=DB_user, password=DB_password, host=DB_host)
@@ -88,7 +89,6 @@ def signinfunc(data):
             test=(json.dumps(i))
             test2 = json.loads(test)
             print(test2)
-            print(len(test2))
             hero = Character(test2[2],test2[2],test2[6],test2[7],test2[8],test2[9],test2[10],test2[11],test2[12],test2[13],test2[14],test2[15])
             isin = True
         else:
@@ -126,7 +126,7 @@ def signcheck():
         global data
         data = request.form.to_dict()
         print(data)
-        signinfunc(data)
+        return signinfunc(data)
     else:
         return 'something went wrong. Check if method was POST.'
 
